@@ -6,3 +6,22 @@
     max-width: 900px;
     margin: auto;
 }
+
+.heading{
+    font-size: 1em;
+    margin: 0;
+}
+
+.meta{
+    margin: 0;
+    margin-top: calc(5rem /18);
+}
+
+.stories__story + .stories__story{
+    margin-top: 0.5em;
+}
+
+.story__heading{
+    color: rgb(187, 46, 31);
+}
+

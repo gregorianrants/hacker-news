@@ -34,16 +34,16 @@ export default function Story({story, large, contextClass}) {
 
     <ThemeContext.Consumer>{
         ({theme, toggleTheme}) => (
-            <HeaderStyled>
-                <HeaderTitle large={large}
+            <div className='stories__story story'>
+                <h2 className='story__heading heading' large={large}
                              color={theme==='light' ?'red' : 'grey'}>
                     {title}
-                </HeaderTitle>
-                <HeaderSubtitle>
+                </h2>
+                <p className='story__subtitle meta'>
                     {StorySubtitle(
                         {by, time, id, descendants,theme})}
-                </HeaderSubtitle>
-            </HeaderStyled>
+                </p>
+            </div>
         )}
     </ThemeContext.Consumer>
 

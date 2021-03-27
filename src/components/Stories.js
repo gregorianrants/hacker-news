@@ -33,7 +33,7 @@ export default class Stories extends React.Component {
 
     render() {
         return (
-            <div className='List'>
+            <div className='stories'>
                 {this.state.stories.map(
                     (story) => {
                         return (<Story
