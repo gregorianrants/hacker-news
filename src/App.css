@@ -1,0 +1,8 @@
+.container--dark{
+    background-color: #1C2022;
+}
+
+.container__inner{
+    max-width: 900px;
+    margin: auto;
+}

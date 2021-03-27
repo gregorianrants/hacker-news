@@ -37,7 +37,6 @@ const ContainerStyled = styled.div`
 class App extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             theme: 'light',
             toggleTheme: ()=>{
@@ -53,33 +52,38 @@ class App extends React.Component {
             <>
                 <ThemeContext.Provider value={this.state}>
                     <ThemeContext.Consumer>
-                        {({theme})=><GlobalStyle theme={theme}/>}
-                    </ThemeContext.Consumer>
-                    <Router>
-                        <ContainerStyled>
-                            <NavBar />
-                            <Switch>
-                                <Route exact path='/'>
-                                    <Top />
-                                </Route>
-                                <Route path='/new'>
-                                    <New />
-                                </Route>
-                                <Route path='/post'>
-                                    <Comments />
-                                </Route>
-                                <Route
-                                    path='/user'
-                                    render={({location}) => {
-                                        let {id} = queryString.parse(location.search)
-                                        return (<User userID={id}/>
-                                        )
-                                    }}
+                        {({theme})=>(
+                            <div className={`container ${theme==='dark' ? 'container--dark' : ''}`}>
+                                <div className='container__inner'>
+                                    <Router>
+                                        <NavBar />
+                                        <Switch>
+                                            <Route exact path='/'>
+                                                <Top />
+                                            </Route>
+                                            <Route path='/new'>
+                                                <New />
+                                            </Route>
+                                            <Route path='/post'>
+                                                <Comments />
+                                            </Route>
+                                            <Route
+                                                path='/user'
+                                                render={({location}) => {
+                                                    let {id} = queryString.parse(location.search)
+                                                    return (<User userID={id}/>
+                                                    )
+                                                }}
 
-                                />
-                            </Switch>
-                        </ContainerStyled>
-                    </Router>
+                                            />
+                                        </Switch>
+                                    </Router>
+                                </div>
+
+                            </div>
+
+                        )}
+                    </ThemeContext.Consumer>
                 </ThemeContext.Provider>
             </>
         )
