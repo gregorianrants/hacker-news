@@ -6,24 +6,9 @@ import queryString from 'query-string'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {Meta,LinkStyled} from "../Style/BaseStyles";
+import LinkThemed from "../LinkThemed";
+import ThemeContext from "./ThemeContext";
 
-const CommentStyled = styled.div`
-  background-color: #EDEDED;
-  padding: 1em;
-  margin-top: 1em;
-  border-radius: 0.2em;
-`
-
-const CommentContent = styled.div`
-  & p{
-    margin-top: 1em;
-  }
-  margin-top: 1em;
-`
-
-/*const CommentSubtitle = styled(HeaderSubtitle)`
-margin-bottom: 1em;
-`*/
 
 function Comment(props){
     let {by,time,text}= props.comment
@@ -32,14 +17,21 @@ function Comment(props){
     function createMarkup(content){
         return {__html: content}
     }
-    const userLink =  <LinkStyled to={`/user?id=${by}`}>{by}</LinkStyled>//TODO this
+    const userLink =  <LinkThemed to={`/user?id=${by}`}>{by}</LinkThemed>//TODO this
     // link is also used in Story consider reafactoring into a function to
     // be shared
     return(
-        <CommentStyled>
-            <Meta>by {userLink} on {time}</Meta>
-            <CommentContent dangerouslySetInnerHTML={createMarkup(text)}></CommentContent>
-        </CommentStyled>
+    <ThemeContext.Consumer>{
+        ({theme}) => (
+            <div className={`comment
+            ${theme==='dark' ? 'comment--dark' : ''}
+            `}>
+                <div className='meta'>by {userLink} on {time}</div>
+                <p className='comment__content' dangerouslySetInnerHTML={createMarkup(
+                    text)}></p>
+            </div>
+        )}
+    </ThemeContext.Consumer>
     )
 }
 

@@ -2,19 +2,24 @@ import React from 'react'
 import Story from './Story'
 import PropTypes from 'prop-types'
 import ThemeContext from "./TopLevel/ThemeContext";
+import Loading from "./Loading"
+
 
 export default class Stories extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             stories: [],
+            loading: true
         }
     }
 
     async updateStories() {
         try {
+            const stories = await this.props.updateStories()
             this.setState({
-                stories: await this.props.updateStories()
+                stories,
+                loading: false
             })
         } catch (err) {
             console.log(err)
@@ -33,6 +38,7 @@ export default class Stories extends React.Component {
 
     render() {
         return (
+            this.state.loading ? <Loading/>:
             <div className='stories'>
                 {this.state.stories.map(
                     (story) => {

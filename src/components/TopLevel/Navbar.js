@@ -27,16 +27,20 @@ export default function NavBar() {
     return (
         <ThemeContext.Consumer>{
             ({theme, toggleTheme}) => (
-                <NavBarStyled>
-                    <NavLinkStyled exact to='/'
+                <div className='navbar'>
+                    <NavLink exact to='/'
                                    activeStyle={activeStyle}
-                                   theme={theme}
-                    >Top</NavLinkStyled>
-                    <NavLinkStyled to='/new'
+                                  className={`navlink ${theme==='dark' ? 'navlink--dark' : '' }`}
+                    >Top</NavLink>
+                    <NavLink to='/new'
                                    activeStyle={activeStyle}
-                                   theme={theme}>New</NavLinkStyled>
-                    <button onClick={toggleTheme}>🔦</button>
-                </NavBarStyled>
+                             className={`navlink ${theme==='dark' ? 'navlink--dark' : '' }`}
+                    >New</NavLink>
+                    <button
+                        className='torch' onClick={toggleTheme}>
+                        {theme==='light' ? '🔦' : '💡'}
+                    </button>'
+                </div>
             )}
         </ThemeContext.Consumer>
     )

@@ -1,27 +1,127 @@
-.container--dark{
-    background-color: #1C2022;
+body {
+    font-size: 16px;
+    --font-color-light-grey: #DADADA;
+    --font-color-grey: grey;
+    --font-size-heading-large: 32px;
+    --red: rgb(187, 46, 31);
+    --black: black;
 }
 
-.container__inner{
+
+.container--dark {
+    background-color: #1C2022;
+    height: 100vh;
+}
+
+.container__inner {
     max-width: 900px;
     margin: auto;
 }
 
-.heading{
-    font-size: 1em;
-    margin: 0;
+.loading{
+    font-size: 26px;
+    text-align: center;
+}
+
+.loading--dark{
+    color: white;
+}
+
+.link{
+    color: black;
+}
+
+.link--dark{
+    color: #DADADA;
+}
+
+.navbar{
+    display: flex;
+    padding: 3.45em 0 2em 0;
+}
+
+.navlink{
+    text-decoration: none;
+    font-size: calc(18rem / 16);
+    font-weight: bold;
+    padding: 0 0.5em 0 0;
+    color: black;
+}
+
+.navlink--dark{
+    color: var(--font-color-light-grey);
+}
+
+.torch{
+    margin-left: auto;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
 }
 
 .meta{
+    color: grey;
+}
+
+.heading{
     margin: 0;
-    margin-top: calc(5rem /18);
 }
 
-.stories__story + .stories__story{
-    margin-top: 0.5em;
+.heading + .heading{
+    margin-top: 20px;
 }
 
-.story__heading{
-    color: rgb(187, 46, 31);
+.heading__title{
+    margin: 0;
+    font-size: 1em;
+    color: var(--red);
+    text-decoration: none;
+    font-weight: bold;
 }
+
+.heading--user .heading__title{
+    color: var(--black);
+}
+
+.heading--large .heading__title{
+    font-size: var(--font-size-heading-large);
+}
+
+.heading--dark .heading__title{
+    color: var(--font-color-light-grey);
+}
+
+.heading--dark .heading__title--user{
+    color: var(--font-color-light-grey);
+}
+
+.heading__subtitle{
+    margin-top: 5px;
+}
+
+.heading--dark .heading__subtitle{
+    color: var(--font-color-grey);
+}
+
+.comment{
+    background-color: #EDEDED;
+    padding: 1em;
+    margin-top: 1em;
+    border-radius: 0.2em;
+}
+
+.comment--dark{
+    background-color: #2A2E2F;
+}
+
+.comment--dark .comment__content{
+    color: var(--font-color-light-grey);
+}
+
+.comment--dark a{
+    color: var(--font-color-light-grey);
+}
+
+
+
 

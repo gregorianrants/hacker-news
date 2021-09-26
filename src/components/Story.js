@@ -2,52 +2,47 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import {HeaderStyled,HeaderTitle,HeaderSubtitle,LinkStyled} from './Style/Header'
-import styled from 'styled-components'
+import {Link} from "react-router-dom";
 import ThemeContext from "./TopLevel/ThemeContext";
+import LinkThemed from "./LinkThemed";
 
 
-function StorySubtitle({by,time,id,descendants,theme}){
-    const userLink =  <LinkStyled
-        to={`/user?id=${by}`}
-        theme={theme}
-    >{by}
-    </LinkStyled>
+
+
+function StorySubtitle({by, time, id, descendants}) {
+    const userLink = <LinkThemed to={`/user?id=${by}`}>
+                    {by}
+                    </LinkThemed>
     const on = new Date(time * 1000).toLocaleString()
-    const commentLink = <LinkStyled
-        to={`/post?id=${id}`}
-        theme={theme}
-    >
+    const commentLink = <LinkThemed to={`/post?id=${id}`}>
         {`${descendants}`}
-    </LinkStyled>
-    return(
-        <>by {userLink} on {on} with {commentLink} comments</>
+    </LinkThemed>
+    return (
+        <p className={`heading__subtitle`}>
+            by {userLink} on {on} with {commentLink} comments
+        </p>
     )
 }
 
-export default function Story({story, large, contextClass}) {
+export default function Story({story, large}) {
     console.log(story)
-    let {title, by, time, id, descendants} = story
-    let numberOfComments
-        = story.hasOwnProperty('kids') ? story.kids.length : 0;
+    let {title, by, time, id, descendants,url} = story
+    let subtitleProps = {by, time, id, descendants}
     return (
-
-    <ThemeContext.Consumer>{
-        ({theme, toggleTheme}) => (
-            <div className='stories__story story'>
-                <h2 className='story__heading heading' large={large}
-                             color={theme==='light' ?'red' : 'grey'}>
-                    {title}
-                </h2>
-                <p className='story__subtitle meta'>
-                    {StorySubtitle(
-                        {by, time, id, descendants,theme})}
-                </p>
-            </div>
-        )}
-    </ThemeContext.Consumer>
-
-)
+        <ThemeContext.Consumer>{
+            ({theme, toggleTheme}) => (
+                <div className={`heading 
+                ${large ? 'heading--large' : ''}
+                ${theme === 'dark' ? 'heading--dark' : ''}
+                `}>
+                    <a href={url} className='heading__title'>
+                        {title}
+                    </a>
+                    <StorySubtitle {...subtitleProps} theme={theme}/>
+                </div>
+            )}
+        </ThemeContext.Consumer>
+    )
 }
 
 Story.defaultProps = {
